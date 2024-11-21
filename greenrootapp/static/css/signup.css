@@ -1,0 +1,11 @@
+/* Link styles for login and signup links */
+.signup-link {
+    color: #ff8c42;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  

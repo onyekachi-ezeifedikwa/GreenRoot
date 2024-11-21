@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenRoot</title>
+    <link rel="stylesheet" href="{% static 'css/index.css'  %}">
+  
+</head>
+<body>
+    <header>
+        GreenRoot
+    </header>
+    <nav>
+        <a href="#post-question">Ask a Question</a>
+        <a href="#top-questions">Knowledge Resources</a>
+        <a href="login">Login</a>
+    </nav>
+
+    <section class="hero">
+        <h1>Connect, Learn, and Share with Fellow Farmers</h1>
+        <p>Your community for farming advice, shared experiences, and real-world solutions to grow your knowledge, connect with fellow farmers, <br> and improve your agricultural practices.</p>
+      <a href="signup">  <button>Share your Experience</button></a>
+    </section>
+
+    <section class="section" id="top-questions">
+        <h2>Discover World's Farming Knowledge</h2>
+        <p>Explore the most popular topics farmers are talking about:</p>
+        <ul>
+            <li><a href="">Introduction to Agriculture</a></li>
+            <li><a href="">Agro forestry in Natural Farming Systems</a></li>
+            <li><a href="">Revolutionizing pest control</a></li>
+        </ul>
+    </section>
+
+    <section class="section" id="success-stories">
+        <h2>Farmer Success Stories</h2>
+        <p>Read stories from farmers who resolved challenges and improved their practices.</p>
+        <div>"Thanks to GreenRoot, I learned how to prevent soil erosion effectively!" - Onyeka </div>
+        <div>"Thanks to GreenRoot Community, I now know how to maximize my crop yield with minimal resources" - Abdulaziz Abdulmutallab</div>
+        <div>"Thanks to GreenRoot Community, I have learned how to boost my crop yield efficiently while conserving resources" - Hauwa Imam</div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <h2>How It Works</h2>
+        <p>Follow these simple steps to start engaging:</p>
+        <ul>
+            <li>Post Your Question</li>
+            <li>Receive Advice from Fellow Farmers</li>
+            <li>Share Your Experience</li>
+        </ul>
+    </section>
+
+    <section class="form-section" id="post-question">
+        <h2>Post Your Question or Share Your Experience</h2>
+        <form action="home" method="post">
+            {% csrf_token %}
+            <input type="text" name="title" id="title" placeholder="Name" required>
+            <textarea placeholder="Share your question or experience" name="content" id="content" required></textarea>
+            <button type="submit">POST</button>
+        </form>
+    </section>
+
+    <div id="posts-container"></div>
+
+    <footer class="footer">
+        &copy; 2024 GreenRoot. 
+    </footer>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const questionInput = document.querySelector('input[type="text"]');
+            const experienceInput = document.querySelector('textarea');
+            const postsContainer = document.getElementById('posts-container');
+
+            if (questionInput.value.trim() !== "" && experienceInput.value.trim() !== "") {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post-container');
+                postDiv.innerHTML = `
+                    <h3>${questionInput.value}</h3>
+                    <p>${experienceInput.value}</p>
+                `;
+
+                postsContainer.appendChild(postDiv);
+                questionInput.value = "";
+                experienceInput.value = "";
+            } else {
+                alert('Please fill in both fields before submitting.');
+            }
+        }
+    </script>
+</body>
+</html>
